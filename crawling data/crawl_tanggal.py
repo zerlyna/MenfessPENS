@@ -11,10 +11,10 @@ GROUP_TARGET = -1001647181983  # PENS MENFESS
 
 # Rentang tanggal (format: 'TAHUN-BULAN-TANGGAL'), dihitung dalam WIB.
 # Tanggal akhir ikut diambil (inklusif sampai pukul 23:59 WIB).
-TANGGAL_MULAI = '2026-08-01'
-TANGGAL_AKHIR = '2026-08-31'
+TANGGAL_MULAI = '2026-10-01'
+TANGGAL_AKHIR = '2026-10-31'
 
-OUTPUT_FILE = 'telegram_menfess_agustus.csv'
+OUTPUT_FILE = 'telegram_menfess_oktober.csv'
 # =============================
 
 WIB = timezone(timedelta(hours=7))
