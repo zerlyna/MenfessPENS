@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menfess PENS | Dashboard Sentimen</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">M</div>
+        <div class="brand-text">
+          <strong>Menfess PENS</strong>
+          <small>Sentiment Dashboard</small>
+        </div>
+      </div>
+
+      <div class="nav-caption">MENU UTAMA</div>
+
+      <nav class="navigation">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">▦</span>
+          <span>Dashboard</span>
+        </button>
+
+        <button class="nav-item" data-page="upload">
+          <span class="nav-icon">⇧</span>
+          <span>Upload Data</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="sidebar-illustration">
+          <img src="asset/pens vektor.png" alt="Ilustrasi PENS">
+        </div>
+
+        <div class="sidebar-logos">
+          <img src="asset/logomenfes.png" alt="Logo Menfess">
+          <div class="sidebar-logo-text">
+            <strong>Menfess PENS</strong>
+            <small>Politeknik Elektronika Negeri Surabaya</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+
+      <header class="topbar">
+        <div>
+          <h1 id="pageHeading">Dashboard Overview</h1>
+          <p id="pageSubheading">Pantau sentimen dan aktivitas pengiriman Menfess PENS.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <span class="year-chip">JAN — OKT 2026</span>
+          <span class="data-badge" id="dataStatus">Data Demo</span>
+          <div class="profile-circle">M</div>
+        </div>
+      </header>
+
+      <!-- HALAMAN DASHBOARD -->
+      <section class="page active" id="dashboard">
+
+        <div class="notice">
+          <span>ⓘ</span>
+          <p>
+            Tampilan awal menggunakan data demo. Upload dataset aktual untuk
+            memperbarui seluruh hasil analisis.
+          </p>
+        </div>
+
+        <!-- KPI -->
+        <div class="kpi-grid">
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Total Postingan</span>
+              <span class="kpi-icon icon-blue">▤</span>
+            </div>
+            <h2 id="totalPosts">0</h2>
+            <small>Postingan teranalisis</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Positif</span>
+              <span class="kpi-icon icon-green">↗</span>
+            </div>
+            <h2 id="positiveTotal">0</h2>
+            <small id="positivePercent">0% dari total</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Negatif</span>
+              <span class="kpi-icon icon-red">↘</span>
+            </div>
+            <h2 id="negativeTotal">0</h2>
+            <small id="negativePercent">0% dari total</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Netral</span>
+              <span class="kpi-icon icon-yellow">—</span>
+            </div>
+            <h2 id="neutralTotal">0</h2>
+            <small id="neutralPercent">0% dari total</small>
+          </article>
+        </div>
+
+        <!-- FILTER -->
+        <section class="filter-card">
+          <div class="filter-title">
+            <div>
+              <h3>Filter Analisis</h3>
+              <p>Pilih periode dan kategori yang ingin ditampilkan</p>
+            </div>
+            <button class="text-button" id="resetFilters">Reset Filter</button>
+          </div>
+
+          <div class="filter-grid">
+            <div class="form-field">
+              <label for="monthFilter">Periode</label>
+              <select id="monthFilter">
+                <option value="all">Januari–Oktober</option>
+                <option value="Januari">Januari</option>
+                <option value="Februari">Februari</option>
+                <option value="Maret">Maret</option>
+                <option value="April">April</option>
+                <option value="Mei">Mei</option>
+                <option value="Juni">Juni</option>
+                <option value="Juli">Juli</option>
+                <option value="Agustus">Agustus</option>
+                <option value="September">September</option>
+                <option value="Oktober">Oktober</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="topicFilter">Kategori</label>
+              <select id="topicFilter">
+                <option value="all">Semua Kategori</option>
+                <option value="Akademik & Perkuliahan">Akademik & Perkuliahan</option>
+                <option value="Kegiatan & Acara Kampus">Kegiatan & Acara Kampus</option>
+                <option value="Kehidupan & Kesejahteraan Mahasiswa">Kehidupan & Kesejahteraan</option>
+                <option value="Layanan & Fasilitas Kampus">Layanan & Fasilitas</option>
+                <option value="Organisasi & Pengembangan Mahasiswa">Organisasi & Pengembangan</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="sentimentFilter">Sentimen</label>
+              <select id="sentimentFilter">
+                <option value="all">Semua Sentimen</option>
+                <option value="positif">Positif</option>
+                <option value="negatif">Negatif</option>
+                <option value="netral">Netral</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="keywordSearch">Cari Keyword</label>
+              <input id="keywordSearch" type="search" placeholder="Cari kata...">
+            </div>
+          </div>
+        </section>
+
+        <!-- KONTEN UTAMA: KOLOM KIRI DAN KANAN -->
+        <div class="dashboard-grid">
+
+          <div class="primary-column">
+
+            <section class="widget-card trend-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Tren Sentimen</h3>
+                  <p>Perkembangan sentimen setiap bulan</p>
+                </div>
+
+                <select id="trendSentimentFilter" class="compact-select">
+                  <option value="all">Semua Sentimen</option>
+                  <option value="positif">Positif</option>
+                  <option value="negatif">Negatif</option>
+                  <option value="netral">Netral</option>
+                </select>
+              </div>
+
+              <div class="chart-box trend-chart-box">
+                <canvas id="trendChart"></canvas>
+              </div>
+            </section>
+
+            <section class="widget-card category-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Distribusi Kategori</h3>
+                  <p>Topik yang paling sering dibahas mahasiswa</p>
+                </div>
+              </div>
+
+              <div class="chart-box category-chart-box">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            </section>
+
+            <section class="widget-card priority-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Prioritas Evaluasi</h3>
+                  <p>Kategori berdasarkan persentase sentimen negatif</p>
+                </div>
+              </div>
+              <div id="priorityList" class="priority-list"></div>
+            </section>
+
+          </div>
+
+          <div class="secondary-column">
+
+            <section class="widget-card sentiment-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Sentiment Overview</h3>
+                  <p>Komposisi sentimen postingan</p>
+                </div>
+              </div>
+
+              <div class="chart-box doughnut-box">
+                <canvas id="sentimentChart"></canvas>
+              </div>
+
+              <div id="sentimentLegend" class="sentiment-legend"></div>
+            </section>
+
+            <section class="widget-card rush-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Rush Hour Menfess</h3>
+                  <p>Jam paling ramai pengiriman postingan</p>
+                </div>
+                <span class="mini-tag">24 Jam</span>
+              </div>
+
+              <div class="rush-highlight">
+                <div>
+                  <small>Waktu tersibuk</small>
+                  <strong id="peakHour">--:--</strong>
+                </div>
+                <span class="rush-icon">◷</span>
+              </div>
+
+              <div class="chart-box rush-chart-box">
+                <canvas id="rushChart"></canvas>
+              </div>
+
+              <div class="rush-insight" id="rushInsight">
+                Belum ada informasi jam pengiriman.
+              </div>
+            </section>
+
+            <section class="widget-card keyword-widget">
+              <div class="widget-heading">
+                <div>
+                  <h3>Keyword Teratas</h3>
+                  <p>Kata yang sering muncul dalam Menfess</p>
+                </div>
+              </div>
+              <div id="keywordCloud" class="keyword-cloud"></div>
+            </section>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- HALAMAN UPLOAD -->
+      <section class="page" id="upload">
+        <div class="upload-intro">
+          <h2>Upload Dataset</h2>
+          <p>Unggah dataset Menfess untuk memperbarui visualisasi dashboard.</p>
+        </div>
+
+        <section class="widget-card upload-card">
+          <div class="upload-symbol">⇧</div>
+          <h3>Upload Dataset Menfess</h3>
+          <p>Drag and drop file atau pilih file dari perangkat.</p>
+
+          <div class="dropzone" id="dropzone">
+            <div class="drop-icon">▤</div>
+            <strong>Letakkan file di sini</strong>
+            <span>Format yang didukung CSV, XLSX, XLS</span>
+            <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+            <button class="primary-button" id="chooseFile">Pilih File</button>
+          </div>
+
+          <div class="selected-file" id="selectedFile" hidden>
+            <div>
+              <strong id="fileName">dataset.xlsx</strong>
+              <small id="fileInfo">File siap diproses</small>
+            </div>
+            <button class="remove-button" id="removeFile">Hapus</button>
+          </div>
+
+          <button class="primary-button process-button" id="processFile" disabled>
+            Proses Dataset
+          </button>
+          <p class="upload-message" id="uploadMessage"></p>
+        </section>
+
+        <section class="widget-card format-card">
+          <h3>Format Dataset</h3>
+          <p>Dataset sebaiknya memiliki kolom berikut:</p>
+
+          <div class="format-list">
+            <div><strong>text</strong><span>Isi postingan Menfess</span></div>
+            <div><strong>month</strong><span>Bulan postingan</span></div>
+            <div><strong>topic</strong><span>Kategori postingan</span></div>
+            <div><strong>sentiment</strong><span>Label positif, negatif, atau netral</span></div>
+            <div><strong>time</strong><span>Jam/tanggal pengiriman untuk analisis Rush Hour</span></div>
+          </div>
+
+          <p class="format-note">
+            Kolom time bersifat opsional untuk dashboard umum, tetapi wajib tersedia
+            jika ingin mendapatkan analisis Rush Hour berdasarkan data aktual.
+          </p>
+
+          <button class="outline-button" id="downloadTemplate">Unduh Template Dataset</button>
+        </section>
+
+        <div class="upload-bottom">
+          <button class="outline-button" id="restoreDemo">
+            Kembalikan Data Demo
+          </button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        Menfess PENS Analytics · 2026
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
