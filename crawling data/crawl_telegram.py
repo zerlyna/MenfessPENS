@@ -1,22 +1,26 @@
 import csv
 import asyncio
+import os
+from datetime import datetime, timezone
 from telethon import TelegramClient
 from telethon.errors import FloodWaitError
 
 # ====== ISI BAGIAN INI ======
 API_ID = 36732928                  # angka api_id dari my.telegram.org (tanpa tanda kutip)
-API_HASH = 'b4bef4eac74871ec0b62aa0ee57ff928'       # api_hash (string)
+API_HASH = 'b4bef4eac74871ec0b62aa0ee57ff928'      # api_hash (string)
 GROUP_TARGET = -1001748982141  # ID grup (integer), bukan username
-LIMIT = 500                     # uji coba 50 dulu, lalu naikkan (mis. 500)
+LIMIT = 500                    # uji coba 50 dulu, lalu naikkan (mis. 500)
 OUTPUT_FILE = 'telegramchatdiscuss.csv'
 # =============================
 
-client = TelegramClient('sesi_grup_crawling', API_ID, API_HASH)
+# Mengatur agar file sesi tersimpan di folder yang sama dengan skrip ini secara aman
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SESSION_PATH = os.path.join(BASE_DIR, 'sesi_grup_crawling')
 
+client = TelegramClient(SESSION_PATH, API_ID, API_HASH)
 
 def get_username(sender):
     return getattr(sender, 'username', None) or 'Anonymous'
-
 
 async def main():
     print("Memulai proses crawling...")
@@ -56,7 +60,6 @@ async def main():
                     print(f"Gagal mengambil komentar untuk pesan {message.id}: {e}")
 
     print(f"Selesai! Data disimpan ke '{OUTPUT_FILE}'")
-
 
 with client:
     client.loop.run_until_complete(main())
