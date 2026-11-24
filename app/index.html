@@ -23,7 +23,7 @@
         <div class="brand-mark">M</div>
         <div class="brand-text">
           <strong>Menfess PENS</strong>
-          <small>Sentiment Dashboard</small>
+          <small>Dasbor Sentimen</small>
         </div>
       </div>
 
@@ -32,12 +32,12 @@
       <nav class="navigation">
         <button class="nav-item active" data-page="dashboard">
           <span class="nav-icon">▦</span>
-          <span>Dashboard</span>
+          <span>Dasbor</span>
         </button>
 
         <button class="nav-item" data-page="upload">
           <span class="nav-icon">⇧</span>
-          <span>Upload Data</span>
+          <span>Unggah Data</span>
         </button>
       </nav>
 
@@ -60,7 +60,7 @@
 
       <header class="topbar">
         <div>
-          <h1 id="pageHeading">Dashboard Overview</h1>
+          <h1 id="pageHeading">Ringkasan Dasbor</h1>
           <p id="pageSubheading">Pantau sentimen dan aktivitas pengiriman Menfess PENS.</p>
         </div>
 
@@ -77,48 +77,9 @@
         <div class="notice">
           <span>ⓘ</span>
           <p>
-            Tampilan awal menggunakan data demo. Upload dataset aktual untuk
+            Tampilan awal menggunakan data demo. Unggah dataset aktual untuk
             memperbarui seluruh hasil analisis.
           </p>
-        </div>
-
-        <!-- KPI -->
-        <div class="kpi-grid">
-          <article class="kpi-card">
-            <div class="kpi-top">
-              <span>Total Postingan</span>
-              <span class="kpi-icon icon-blue">▤</span>
-            </div>
-            <h2 id="totalPosts">0</h2>
-            <small>Postingan teranalisis</small>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-top">
-              <span>Sentimen Positif</span>
-              <span class="kpi-icon icon-green">↗</span>
-            </div>
-            <h2 id="positiveTotal">0</h2>
-            <small id="positivePercent">0% dari total</small>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-top">
-              <span>Sentimen Negatif</span>
-              <span class="kpi-icon icon-red">↘</span>
-            </div>
-            <h2 id="negativeTotal">0</h2>
-            <small id="negativePercent">0% dari total</small>
-          </article>
-
-          <article class="kpi-card">
-            <div class="kpi-top">
-              <span>Sentimen Netral</span>
-              <span class="kpi-icon icon-yellow">—</span>
-            </div>
-            <h2 id="neutralTotal">0</h2>
-            <small id="neutralPercent">0% dari total</small>
-          </article>
         </div>
 
         <!-- FILTER -->
@@ -128,7 +89,7 @@
               <h3>Filter Analisis</h3>
               <p>Pilih periode dan kategori yang ingin ditampilkan</p>
             </div>
-            <button class="text-button" id="resetFilters">Reset Filter</button>
+            <button class="text-button" id="resetFilters">Atur Ulang</button>
           </div>
 
           <div class="filter-grid">
@@ -172,12 +133,59 @@
             </div>
 
             <div class="form-field">
-              <label for="keywordSearch">Cari Keyword</label>
+              <label for="keywordSearch">Cari Kata Kunci</label>
               <input id="keywordSearch" type="search" placeholder="Cari kata...">
             </div>
           </div>
         </section>
 
+        <!-- KPI -->
+        <div class="kpi-grid">
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Total Postingan</span>
+              <span class="kpi-icon icon-blue">▤</span>
+            </div>
+            <h2 id="totalPosts">0</h2>
+            <small>Postingan teranalisis</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Positif</span>
+              <span class="kpi-icon icon-green">↗</span>
+            </div>
+            <h2 id="positiveTotal">0</h2>
+            <small id="positivePercent">0% dari total</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Negatif</span>
+              <span class="kpi-icon icon-red">↘</span>
+            </div>
+            <h2 id="negativeTotal">0</h2>
+            <small id="negativePercent">0% dari total</small>
+          </article>
+
+          <article class="kpi-card">
+            <div class="kpi-top">
+              <span>Sentimen Netral</span>
+              <span class="kpi-icon icon-yellow">—</span>
+            </div>
+            <h2 id="neutralTotal">0</h2>
+            <small id="neutralPercent">0% dari total</small>
+          </article>
+        </div>
+
+        <div class="analysis-grid">
+          <section class="widget-card">
+            <div class="widget-heading"><div><h3>Lonjakan Isu</h3><p>Perbandingan 7 hari terakhir dengan rata-rata 4 minggu sebelumnya</p></div></div>
+            <div id="spikeNote" class="analysis-note"></div>
+            <div class="spike-layout"><div id="spikeList" class="spike-list"></div><div><h4 id="spikeTitle">Tren pembahasan</h4><div class="chart-box spike-chart-box"><canvas id="spikeChart"></canvas></div></div></div>
+          </section>
+          <section class="widget-card"><div class="widget-heading"><div><h3 id="insightTitle">Ringkasan Analisis</h3><p>Temuan berdasarkan data dan filter aktif</p></div></div><div id="insightList" class="insight-list"></div><div class="analysis-note">Ringkasan dihitung otomatis dari agregasi postingan.</div></section>
+        </div>
         <!-- KONTEN UTAMA: KOLOM KIRI DAN KANAN -->
         <div class="dashboard-grid">
 
@@ -233,13 +241,13 @@
             <section class="widget-card sentiment-widget">
               <div class="widget-heading">
                 <div>
-                  <h3>Sentiment Overview</h3>
+                  <h3>Komposisi Sentimen</h3>
                   <p>Komposisi sentimen postingan</p>
                 </div>
               </div>
 
               <div class="chart-box doughnut-box">
-                <canvas id="sentimentChart"></canvas>
+                <canvas id="sentimentChart"></canvas><div class="donut-center"><strong id="donutTotal">0</strong><small>Postingan</small></div>
               </div>
 
               <div id="sentimentLegend" class="sentiment-legend"></div>
@@ -248,10 +256,10 @@
             <section class="widget-card rush-widget">
               <div class="widget-heading">
                 <div>
-                  <h3>Rush Hour Menfess</h3>
+                  <h3>Jam Sibuk Menfess</h3>
                   <p>Jam paling ramai pengiriman postingan</p>
                 </div>
-                <span class="mini-tag">24 Jam</span>
+                <span class="mini-tag">24 jam</span>
               </div>
 
               <div class="rush-highlight">
@@ -274,7 +282,7 @@
             <section class="widget-card keyword-widget">
               <div class="widget-heading">
                 <div>
-                  <h3>Keyword Teratas</h3>
+                  <h3>Kata Kunci Teratas</h3>
                   <p>Kata yang sering muncul dalam Menfess</p>
                 </div>
               </div>
@@ -288,14 +296,14 @@
       <!-- HALAMAN UPLOAD -->
       <section class="page" id="upload">
         <div class="upload-intro">
-          <h2>Upload Dataset</h2>
+          <h2>Unggah Dataset</h2>
           <p>Unggah dataset Menfess untuk memperbarui visualisasi dashboard.</p>
         </div>
 
         <section class="widget-card upload-card">
           <div class="upload-symbol">⇧</div>
-          <h3>Upload Dataset Menfess</h3>
-          <p>Drag and drop file atau pilih file dari perangkat.</p>
+          <h3>Unggah Dataset Menfess</h3>
+          <p>Seret file atau pilih dari perangkat.</p>
 
           <div class="dropzone" id="dropzone">
             <div class="drop-icon">▤</div>
@@ -332,8 +340,7 @@
           </div>
 
           <p class="format-note">
-            Kolom time bersifat opsional untuk dashboard umum, tetapi wajib tersedia
-            jika ingin mendapatkan analisis Rush Hour berdasarkan data aktual.
+            Kolom time bersifat opsional. Untuk lonjakan isu, sertakan tanggal lengkap (YYYY-MM-DD) pada kolom date atau time; untuk jam tersibuk, sertakan jam pengiriman. Gunakan waktu WIB.
           </p>
 
           <button class="outline-button" id="downloadTemplate">Unduh Template Dataset</button>
@@ -347,9 +354,9 @@
       </section>
 
       <footer class="footer">
-        Menfess PENS Analytics · 2026
+        Analitik Menfess PENS · 2026
       </footer>
     </main>
   </div>
-</body>
+<dialog id="detailDialog" class="detail-dialog"><div class="detail-head"><div><h3 id="detailTitle">Detail postingan</h3><p id="detailCount"></p></div><button id="closeDetail" class="outline-button">Tutup</button></div><div id="detailRows"></div><button id="moreDetail" class="outline-button">Tampilkan lebih banyak</button></dialog></body>
 </html>
