@@ -3142,3 +3142,245 @@ body {
     width: 100%;
   }
 }
+
+
+/* =====================================================
+   TOP 5 ISU POSITIF DAN NEGATIF
+===================================================== */
+
+.top-issues-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+}
+
+.top-issue-card {
+  padding: 15px 17px;
+  border: 1px solid #dce5ef;
+  border-radius: 13px;
+  background: #f6f9fc;
+  min-width: 0;
+}
+
+.top-issue-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.top-issue-icon {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  font-size: 20px;
+}
+
+.top-issue-header h3 {
+  color: #153e63;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.top-issue-header p {
+  color: #718198;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+/* Warna sentimen */
+
+.top-issue-card.negative {
+  --issue-color: #d66b70;
+  --issue-bg: #f7e1e3;
+}
+
+.top-issue-card.positive {
+  --issue-color: #38976e;
+  --issue-bg: #dfeee6;
+}
+
+.top-issue-icon {
+  background: var(--issue-bg);
+  color: var(--issue-color);
+}
+
+/* Ranking isu */
+
+.top-issue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.top-issue-item {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: 0.2s ease;
+}
+
+.top-issue-item:hover,
+.top-issue-item.active {
+  background: var(--issue-bg);
+  border-color: var(--issue-color);
+}
+
+.top-issue-item-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.top-issue-number {
+  color: #8b9caf;
+  font-size: 11px;
+  width: 17px;
+}
+
+.top-issue-name {
+  flex: 1;
+  color: #153e63;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  overflow-wrap: anywhere;
+}
+
+.top-issue-count {
+  color: var(--issue-color);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.top-issue-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 10px;
+  background: var(--issue-bg);
+  overflow: hidden;
+}
+
+.top-issue-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--issue-color);
+  transition: width 0.3s ease;
+}
+
+.top-issue-note {
+  color: #718198;
+  font-size: 10px;
+  margin-top: 13px;
+  line-height: 1.6;
+}
+
+.top-issue-empty {
+  color: #718198;
+  font-size: 11px;
+  text-align: center;
+  padding: 30px 10px;
+  line-height: 1.7;
+}
+
+/* Informasi isu yang sedang dipilih */
+
+.explorer-issue-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 13px;
+  margin-bottom: 12px;
+  border: 1px solid #d7e4f1;
+  border-radius: 9px;
+  background: #e9f1fa;
+  color: #174571;
+  font-size: 11px;
+}
+
+.explorer-issue-status[hidden] {
+  display: none !important;
+}
+
+.explorer-issue-status button {
+  border: none;
+  background: transparent;
+  color: #174571;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.explorer-issue-status button:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .top-issues-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .top-issue-card {
+    padding: 13px;
+  }
+}
+
+/* =========================
+   LOGO KIRI ATAS BARU
+========================= */
+
+.brand-kampusside {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 6px 2px 14px;
+}
+
+.kampusside-logo {
+    display: block;
+    width: 155px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* =========================
+   GAMBAR GEDUNG PENS SIDEBAR
+========================= */
+
+.sidebar-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+    padding: 20px 0 14px;
+    min-height: 170px; /* kasih ruang cukup */
+}
+
+.sidebar-illustration img {
+    width: 240px;
+    max-width: 100%;
+    height: auto;       /* penting: biar gak gepeng */
+    max-height: 140px;  /* batasi tinggi tanpa merusak rasio */
+    object-fit: contain;
+    display: block;
+    transform: translateY(30px);
+}
